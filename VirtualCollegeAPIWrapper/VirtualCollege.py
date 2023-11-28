@@ -7,14 +7,17 @@ import jwt
 from datetime import datetime, timedelta
 from dataclasses import dataclass
 
+
 @dataclass
 class AuthTokenNotCreated(Exception):
     def __str__(self):
         return f"auth_token is None, get_authorisation_token must be called first"
-    
+
+
 @dataclass
 class InvalidReport(Exception):
     message: str = ""
+
     def __str__(self):
         return f"Invalid Report Type, valid reports: [{self.message}]"
 
