@@ -1,4 +1,6 @@
-# original API DOCS  https://enableapi.docs.apiary.io/#reference/security/access-tokens
+# VirtualCollegeAPI
+
+original API DOCS  https://enableapi.docs.apiary.io/#reference/security/access-tokens
 This is a small project, the entire API is not covered yet, 
 I just added the methods that I needed, PRs are welcome.
 
