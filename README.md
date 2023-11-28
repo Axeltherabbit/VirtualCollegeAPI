@@ -11,7 +11,7 @@ it handles the creation of JWT and the encoding
 ## Install
 `pip install virtualcollegeapiwrapper`
 
-usage example
+## Usage example
 ```
 from VirtualCollegeAPIWrapper.VirtualCollege import VirtualCollegeAPI
 
