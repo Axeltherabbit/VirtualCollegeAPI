@@ -7,6 +7,10 @@ I just added the methods that I needed, PRs are welcome.
 
 it handles the creation of JWT and the encoding
 
+
+## Install
+`pip install virtualcollegeapiwrapper`
+
 usage example
 ```
 from VirtualCollegeAPIWrapper.VirtualCollege import VirtualCollegeAPI
