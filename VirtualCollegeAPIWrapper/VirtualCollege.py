@@ -115,9 +115,9 @@ class VirtualCollegeAPI:
             cells = row.get("cells", [])
             if cells:
                 if is_first_line:
-                    fp.write("{sep}".join(map(lambda c: c["column"], cells)) + "\n")
+                    fp.write(f"{sep}".join(map(lambda c: c["column"], cells)) + "\n")
                     is_first_line = False
-                fp.write("{sep}".join(map(lambda c: c.get("value", NULLVALUE), cells)) + "\n")
+                fp.write(f"{sep}".join(map(lambda c: c.get("value", NULLVALUE), cells)) + "\n")
 
     def export_add(self, report_type, name):
         if report_type not in self.report_types:
