@@ -33,6 +33,7 @@ class VirtualCollegeAPI:
             "x-api-version": "1.0",
             "x-api-nonce": uuid.uuid4().hex,
             "x-api-access-token": self.access_token,
+            "x-api-language": "en-GB"
         }
 
     def get_request(self, path):
