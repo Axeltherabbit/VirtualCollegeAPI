@@ -97,7 +97,7 @@ class VirtualCollegeAPI:
         self.get_authorisation_token()
         self.get_access_token()
 
-    def export_report(self, report_type, reportID, columns: list[str], fp, sep=","):
+    def export_report(self, report_type, reportID, columns: list[str], fp, sep=",", NULLVALUE= ""):
         if report_type not in self.report_types:
             raise InvalidReport(", ".join(self.report_types))
 
@@ -117,7 +117,7 @@ class VirtualCollegeAPI:
                 if is_first_line:
                     fp.write("{sep}".join(map(lambda c: c["column"], cells)) + "\n")
                     is_first_line = False
-                fp.write("{sep}".join(map(lambda c: c.get("value", None), cells)) + "\n")
+                fp.write("{sep}".join(map(lambda c: c.get("value", NULLVALUE), cells)) + "\n")
 
     def export_add(self, report_type, name):
         if report_type not in self.report_types:
