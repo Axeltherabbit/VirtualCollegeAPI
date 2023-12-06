@@ -21,7 +21,8 @@ class InvalidReport(Exception):
 
     def __str__(self):
         return f"Invalid Report Type, valid reports: [{self.message}]"
-    
+
+
 @dataclass
 class InvalidExportColumns(Exception):
     message: str = ""
@@ -33,18 +34,17 @@ class InvalidExportColumns(Exception):
 class VirtualCollegeAPI:
     report_types = ("modules", "users", "evaluation", "event")
     report_paths = {
-            "modules": "/reporting/learn/moduleAllocation",
-            "users": "/reporting/core/users",
-            "evaluation": "/reporting/learn/evaluationQuestion",
-            "event": "/reporting/events/eventSession",
-        }
+        "modules": "/reporting/learn/moduleAllocation",
+        "users": "/reporting/core/users",
+        "evaluation": "/reporting/learn/evaluationQuestion",
+        "event": "/reporting/events/eventSession",
+    }
     report_columns = {
-            "modules": Columns.columns_module_export,
-            "users": Columns.columns_user_export,
-            "evaluation": Columns.columns_evaluation_export,
-            "event": Columns.columns_evaluation_export,
-        }
-    
+        "modules": Columns.columns_module_export,
+        "users": Columns.columns_user_export,
+        "evaluation": Columns.columns_evaluation_export,
+        "event": Columns.columns_evaluation_export,
+    }
 
     def get_header(self):
         # request a new token if it has less than a minute of lifetime
@@ -56,7 +56,7 @@ class VirtualCollegeAPI:
             "x-api-version": "1.0",
             "x-api-nonce": uuid.uuid4().hex,
             "x-api-access-token": self.access_token,
-            "x-api-language": "en-GB"
+            "x-api-language": "en-GB",
         }
 
     def get_request(self, path):
@@ -101,7 +101,7 @@ class VirtualCollegeAPI:
     def export_report(self, report_type, reportID, columns: list[str], fp):
         if report_type not in self.report_types:
             raise InvalidReport(", ".join(self.report_types))
-        
+
         if any(map(lambda x: x not in self.report_columns[report_type], columns)):
             raise InvalidExportColumns(", ".join(self.report_columns[report_type]))
 
@@ -116,24 +116,21 @@ class VirtualCollegeAPI:
             cells = row.get("cells", [])
             if cells:
                 if is_first_line:
-                    fp.write(",".join(map(lambda c : c["column"], cells))+"\n")
+                    fp.write(",".join(map(lambda c: c["column"], cells)) + "\n")
                     is_first_line = False
-                fp.write(",".join(map(lambda c : c["value"], cells))+"\n")
+                fp.write(",".join(map(lambda c: c["value"], cells)) + "\n")
 
-    
     def export_add(self, report_type, name):
         if report_type not in self.report_types:
             raise InvalidReport(", ".join(self.report_types))
-        
+
         request_body = {"name": name}
-        return self.post_request(
-            f"{self.report_paths[report_type]}", request_body
-        )
+        return self.post_request(f"{self.report_paths[report_type]}", request_body)
 
     def list_reports(self, report_type):
         if report_type not in self.report_types:
             raise InvalidReport(", ".join(self.report_types))
-            
+
         return self.get_request(self.report_paths[report_type])
 
     def search_user(self, search):
