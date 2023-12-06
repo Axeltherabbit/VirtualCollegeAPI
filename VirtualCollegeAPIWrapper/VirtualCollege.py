@@ -6,8 +6,7 @@ import json
 import jwt
 from datetime import datetime, timedelta
 from dataclasses import dataclass
-from Columns import Columns
-
+from VirtualCollegeAPIWrapper.Columns import Columns
 
 @dataclass
 class AuthTokenNotCreated(Exception):
